@@ -38,9 +38,21 @@ Al utilizar una interrupción por hardware, el microcontrolador puede ejecutar u
 
 Finalmente, conseguí utilizar el pulsador para realizar diferentes acciones dependiendo de cuánto tiempo se mantuviera presionado. Esto sería importante más adelante, ya que el mismo botón permite acceder al Modo Administración o reiniciar la máquina, dependiendo de la duración de la pulsación.
 
-## 3. Integración del resto de componentes
+## 3. Integración del sensor de ultrasonidos
 
-Una vez que conseguí que el pulsador funcionase correctamente, fui incorporando progresivamente el resto de componentes.
+El siguiente componente al que dediqué una parte individual fue el sensor de ultrasonidos HC-SR04, que utilizo para detectar cuándo hay una persona delante de la máquina y así saber cuándo debe comenzar el Modo Servicio.
+
+Al principio me encontré con algunos problemas, ya que en ocasiones el sensor fallaba y, aunque yo estuviese justo delante de la máquina, esta volvía a mostrar el mensaje de «ESPERANDO CLIENTE», como si no hubiese nadie.
+
+Para solucionar esto, cambié la forma de comprobar si había una persona delante. En lugar de fiarme de una única medición, hice que el sensor realizase tres mediciones consecutivas. Para ello, aproveché el sistema de `Threads` que había implementado en el programa, configurando el hilo encargado de medir la distancia para que se ejecutase cada 250 milisegundos.
+
+De esta manera, si las tres mediciones consecutivas indicaban que no había nadie delante, la máquina consideraba que estaba vacía. Así evitaba que un fallo puntual del sensor provocase que dejase de detectar a una persona que realmente seguía delante.
+
+https://github.com/user-attachments/assets/34c59600-bd33-4f08-aeb7-1762f048917d
+
+## 4. Integración del resto de componentes
+
+Una vez que conseguí que el pulsador y el sensor de ultrasonidos funcionasen correctamente, fui incorporando progresivamente el resto de componentes.
 
 Primero integré los LED, comprobando que podía controlar su encendido y apagado. Más adelante utilicé uno de ellos para indicar visualmente los distintos estados de la máquina y otro para representar el progreso de la preparación de una bebida mediante cambios progresivos de intensidad.
 
@@ -50,11 +62,11 @@ Después incorporé la pantalla LCD, que sería la encargada de mostrar los mens
 
 A continuación integré el joystick. Comprobé el funcionamiento de sus dos ejes y utilicé también el pulsador central para confirmar las selecciones. Durante las pruebas tuve que ajustar el sentido del movimiento, ya que inicialmente los desplazamientos verticales se interpretaban al revés.
 
-Por último, incorporé los sensores de temperatura y humedad DHT11 y el sensor ultrasónico HC-SR04. El primero permite obtener información del entorno, mientras que el segundo sirve para detectar la presencia de un cliente delante de la máquina.
+Por último, incorporé el sensor de temperatura y humedad DHT11. Este permite obtener información del entorno para mostrarla posteriormente en la pantalla y consultarla desde el Modo Administración.
 
 Durante esta fase fui probando cada incorporación y comprobando que los componentes que ya estaban funcionando seguían respondiendo correctamente.
 
-## 4. Organización del programa mediante hilos (Threads)
+## 5. Organización del programa mediante hilos (Threads)
 
 Cuando el programa empezó a incorporar más componentes y funcionalidades, fue necesario organizar mejor su funcionamiento. En lugar de tener todas las operaciones concentradas en una única secuencia, utilicé la biblioteca Thread para distribuir las diferentes tareas en hilos.
 
@@ -66,7 +78,7 @@ Los principales hilos que fui incorporando son los siguientes:
 
 - **Hilo del joystick:** lee los movimientos de los dos ejes y detecta cuándo se pulsa el botón central. Permite controlar los menús sin tener que utilizar el pulsador principal.
 
-- **Hilo del sensor de distancia:** obtiene periódicamente la distancia medida por el HC-SR04. Es necesario para detectar cuándo se acerca una persona a la máquina y comenzar el proceso de atención.
+- **Hilo del sensor de distancia:** obtiene periódicamente la distancia medida por el HC-SR04. Es necesario para detectar cuándo se acerca una persona a la máquina y comenzar el proceso de atención. También se encarga de realizar las mediciones necesarias para evitar falsas detecciones.
 
 - **Hilo de temperatura y humedad:** realiza las lecturas del DHT11. Como este sensor no necesita actualizarse constantemente, se estableció un intervalo entre lecturas para evitar consultas innecesarias.
 
@@ -80,7 +92,7 @@ Es importante tener en cuenta que estos hilos no se ejecutan realmente en parale
 
 Esta organización hace que el programa sea más sencillo de mantener y permite separar las distintas funcionalidades, evitando tener toda la lógica mezclada en un único bloque.
 
-## 5. Desarrollo del Modo Servicio
+## 6. Desarrollo del Modo Servicio
 
 Una vez integrados los componentes principales y organizadas las tareas, comencé a desarrollar el funcionamiento normal de la máquina, denominado Modo Servicio.
 
@@ -94,7 +106,7 @@ Una vez seleccionado un producto, comienza la preparación. Para simular este pr
 
 Cuando termina la preparación, la pantalla muestra el mensaje «RETIRE BEBIDA» durante tres segundos. Después, la máquina vuelve al estado inicial de espera.
 
-## 6. Desarrollo del Modo Administración
+## 7. Desarrollo del Modo Administración
 
 Después de completar el funcionamiento básico del servicio, añadí un segundo modo destinado a la administración de la máquina.
 
@@ -110,7 +122,7 @@ Los precios modificados se utilizan posteriormente en el Modo Servicio, por lo q
 
 Para salir del Modo Administración hay que mantener pulsado el botón principal durante cinco segundos. De esta manera se vuelve al funcionamiento normal de la máquina.
 
-## 7. Modo Arranque
+## 8. Modo Arranque
 
 También incorporé un pequeño proceso de arranque para indicar visualmente que la máquina está iniciándose.
 
@@ -118,7 +130,7 @@ Cada vez que se enciende o reinicia el Arduino, la pantalla muestra el mensaje �
 
 Cuando termina esta secuencia, el LED queda apagado y la máquina entra automáticamente en el Modo Servicio.
 
-## 8. Problemas encontrados durante el desarrollo: el reinicio y el Watchdog
+## 9. Problemas encontrados durante el desarrollo: el reinicio y el Watchdog
 
 Durante el desarrollo también tuve que resolver algunos problemas relacionados con el reinicio de la placa.
 
@@ -134,7 +146,7 @@ Para solucionarlo, cambié el orden de inicialización. Ahora desactivo el watch
 
 De esta manera evito que la placa entre en un bucle de reinicios durante el arranque. Además, cuando el watchdog está activo, es necesario reiniciarlo periódicamente durante la ejecución normal para indicarle que el programa continúa funcionando correctamente.
 
-## 9. Ajustes finales de la pantalla LCD
+## 10. Ajustes finales de la pantalla LCD
 
 Una de las últimas mejoras que realicé fue incorporar un potenciómetro para regular el contraste de la pantalla LCD.
 
@@ -144,7 +156,7 @@ Conecté sus dos extremos a 5 V y GND, y el terminal central a la entrada VO de 
 
 Fue uno de los últimos ajustes que incorporé, pero mejoró bastante la visibilidad de la pantalla y facilitó la lectura de la información que muestra la máquina.
 
-## 10. Documentación del proyecto con Doxygen
+## 11. Documentación del proyecto con Doxygen
 
 Como parte del desarrollo del proyecto, también he intentado generar documentación automática del programa utilizando Doxygen.
 
@@ -156,7 +168,7 @@ Además, intenté incluir una imagen externa del circuito, llamada `circuito.png
 
 Aunque al principio la documentación generada estaba bastante vacía y tuve que ir ajustando la configuración, conseguí avanzar hasta obtener un documento con información sobre la estructura del programa. Me pareció interesante probar esta herramienta porque permite entender mejor el proyecto sin tener que revisar todo el código directamente.
 
-## 11. Circuito de la máquina expendedora
+## 12. Circuito de la máquina expendedora
 
 Para completar la documentación del proyecto, también he incluido una imagen del circuito con las conexiones de los diferentes componentes.
 
@@ -166,7 +178,7 @@ Esta imagen permite tener una visión general del montaje y entender cómo se re
 
 <img width="1876" height="1841" alt="circuito" src="https://github.com/user-attachments/assets/13308bb8-37e4-4909-8d1f-54938d445669" />
 
-## 12. Resultado actual
+## 13. Resultado actual
 
 A lo largo del desarrollo he pasado de probar cada componente de forma independiente a integrarlos en un único sistema.
 
@@ -177,3 +189,6 @@ También he trabajado en aspectos que van más allá de la programación, como e
 Actualmente, el proyecto cuenta con un Modo Arranque, un Modo Servicio y un Modo Administración, integrando tanto la interacción con el usuario como la consulta y modificación de la información de la máquina.
 
 https://youtu.be/DZK6Qa-B8Ao
+
+https://github.com/user-attachments/assets/e88debad-c3b3-4457-b0ae-eb4bf776abfc
+
