@@ -44,6 +44,8 @@ Una vez que conseguí que el pulsador funcionase correctamente, fui incorporando
 
 Primero integré los LED, comprobando que podía controlar su encendido y apagado. Más adelante utilicé uno de ellos para indicar visualmente los distintos estados de la máquina y otro para representar el progreso de la preparación de una bebida mediante cambios progresivos de intensidad.
 
+https://github.com/user-attachments/assets/136097a4-18f3-4cae-af65-b4c667bbeb81
+
 Después incorporé la pantalla LCD, que sería la encargada de mostrar los mensajes y la información de la máquina. Realicé diferentes pruebas para comprobar que podía escribir en sus dos líneas y actualizar el contenido según las necesidades del programa.
 
 A continuación integré el joystick. Comprobé el funcionamiento de sus dos ejes y utilicé también el pulsador central para confirmar las selecciones. Durante las pruebas tuve que ajustar el sentido del movimiento, ya que inicialmente los desplazamientos verticales se interpretaban al revés.
