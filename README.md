@@ -154,7 +154,9 @@ Al principio, el contraste de la pantalla no era adecuado y los caracteres se ve
 
 Conecté sus dos extremos a 5 V y GND, y el terminal central a la entrada VO de la pantalla LCD. De esta forma, podía regular la tensión aplicada a la entrada de contraste y conseguir que los caracteres se visualizaran correctamente.
 
-Fue uno de los últimos ajustes que incorporé, pero mejoró bastante la visibilidad de la pantalla y facilitó la lectura de la información que muestra la máquina.
+Fue uno de los últimos ajustes que incorporé, pero mejoró bastante la visibilidad de la pantalla y facilitó la lectura de la información que muestra la máquina, como podemos ver aquí como era la imagen antes del potenciometro:
+
+<img width="531" height="723" alt="Pantalla" src="https://github.com/user-attachments/assets/b873ecde-ded2-4d3b-ba4c-8709e99a8ac5" />
 
 ## 11. Documentación del proyecto con Doxygen
 
