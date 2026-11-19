@@ -174,6 +174,4 @@ También he trabajado en aspectos que van más allá de la programación, como e
 
 Actualmente, el proyecto cuenta con un Modo Arranque, un Modo Servicio y un Modo Administración, integrando tanto la interacción con el usuario como la consulta y modificación de la información de la máquina.
 
-
-
-
+https://youtu.be/DZK6Qa-B8Ao
