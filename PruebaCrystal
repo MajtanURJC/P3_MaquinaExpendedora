@@ -1,0 +1,24 @@
+#include <LiquidCrystal.h>
+
+// Pines LCD: RS, E, D4, D5, D6, D7
+const int lcdRs = 12;
+const int lcdE  = 11;
+const int lcdD4 = 7;
+const int lcdD5 = 6;
+const int lcdD6 = 5;
+const int lcdD7 = 4;
+
+LiquidCrystal lcd(lcdRs, lcdE, lcdD4, lcdD5, lcdD6, lcdD7);
+
+void setup() {
+  lcd.begin(16, 2);
+
+  lcd.setCursor(0, 0);
+  lcd.print("HOLA MUNDO!");
+
+  lcd.setCursor(0, 1);
+  lcd.print("LCD FUNCIONA");
+}
+
+void loop() {
+}

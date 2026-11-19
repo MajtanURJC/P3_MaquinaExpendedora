@@ -1,0 +1,1 @@
+Al pirncipio sel watchdog se me reiniciaba todo el rato la placa ya que no lo desactivaba al principio antes de activar los hilos, por lo que me daba problemas, lo tengo que activar una vez activado el hilo.
