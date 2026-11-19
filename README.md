@@ -98,16 +98,13 @@ Después de completar el funcionamiento básico del servicio, añadí un segundo
 
 Para acceder a él hay que mantener pulsado el botón principal durante al menos cinco segundos. Una vez dentro, el LED correspondiente indica que la máquina se encuentra en este modo.
 
-Desde el menú de administración se puede consultar:
+Al principio, implementé únicamente las opciones de consulta de temperatura y humedad, distancia y tiempo que llevaba encendida la placa. Estas fueron las primeras funcionalidades del Modo Administración que desarrollé y se pueden ver en el vídeo:
 
-- La temperatura y humedad del entorno.
-- La distancia detectada por el sensor ultrasónico.
-- El tiempo que lleva encendida la placa.
-- El catálogo de productos y sus precios.
+https://github.com/user-attachments/assets/f02350d5-1739-4f0e-bf0f-b0623d445a9c
 
-También incorporé una opción para modificar los precios. Desde ella se puede seleccionar un producto y aumentar o disminuir su precio en intervalos de cinco céntimos utilizando el joystick. Para guardar el nuevo precio hay que pulsar el joystick, mientras que el movimiento hacia la izquierda permite cancelar los cambios.
+Más adelante fui ampliando este modo. Una de las últimas funcionalidades que añadí fue la posibilidad de consultar y modificar los precios de los productos. Desde el menú se puede seleccionar un producto y aumentar o disminuir su precio en intervalos de cinco céntimos utilizando el joystick. Para guardar el nuevo precio hay que pulsar el joystick, mientras que el movimiento hacia la izquierda permite cancelar los cambios.
 
-Los precios modificados se utilizan posteriormente en el Modo Servicio, por lo que no es necesario cambiar manualmente el catálogo en dos lugares diferentes.
+Los precios modificados se utilizan posteriormente en el Modo Servicio, por lo que los cambios realizados desde administración se reflejan automáticamente cuando un cliente consulta el catálogo.
 
 Para salir del Modo Administración hay que mantener pulsado el botón principal durante cinco segundos. De esta manera se vuelve al funcionamiento normal de la máquina.
 
@@ -176,3 +173,7 @@ He ido incorporando progresivamente el pulsador, los LED, la pantalla, el joysti
 También he trabajado en aspectos que van más allá de la programación, como el ajuste del contraste de la pantalla, la documentación del código mediante Doxygen y la representación del circuito.
 
 Actualmente, el proyecto cuenta con un Modo Arranque, un Modo Servicio y un Modo Administración, integrando tanto la interacción con el usuario como la consulta y modificación de la información de la máquina.
+
+
+
+
