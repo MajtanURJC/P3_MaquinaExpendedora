@@ -178,7 +178,7 @@ En ella se puede observar cómo están conectados los elementos principales al A
 
 Esta imagen permite tener una visión general del montaje y entender cómo se relacionan los distintos componentes con la placa. Además, sirve como referencia para comprobar las conexiones físicas y facilita la comprensión del funcionamiento del sistema.
 
-<img width="1876" height="1841" alt="circuito" src="https://github.com/user-attachments/assets/13308bb8-37e4-4909-8d1f-54938d445669" />
+<img width="1849" height="1884" alt="Imagen" src="https://github.com/user-attachments/assets/382faf6b-e898-4299-b55e-e14969a19ee2" />
 
 ## 13. Resultado actual
 
