@@ -50,6 +50,8 @@ De esta manera, si las tres mediciones consecutivas indicaban que no había nadi
 
 https://github.com/user-attachments/assets/34c59600-bd33-4f08-aeb7-1762f048917d
 
+Otro problema que tuve fue que pulseIn() es una función bloqueante que detiene temporalmente la ejecución del programa mientras espera recibir el eco del sensor, con un tiempo máximo de espera de 30000 µs (30 ms) para evitar que el programa quede detenido indefinidamente, ya que habia veces que no me devolvía medida en mucho tiempo y lo bloqueaba.
+
 ## 4. Integración del resto de componentes
 
 Una vez que conseguí que el pulsador y el sensor de ultrasonidos funcionasen correctamente, fui incorporando progresivamente el resto de componentes.
