@@ -186,7 +186,7 @@ Como curiosidad extra y también cosa a tener en cuenta ya que me equivoque en e
 
 https://forum.fritzing.org/t/joystick-module-fritzing-part/34688
 
-La principal diferencia es la disposición de los pines
+La principal diferencia es la disposición de los pines ya que en el de fritzing GND y 5V están en extremos separados mientras que el que tenemos están juntos y van seguidos.
 
 ## 13. Resultado actual
 
