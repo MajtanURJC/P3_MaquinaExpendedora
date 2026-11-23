@@ -182,6 +182,12 @@ Esta imagen permite tener una visión general del montaje y entender cómo se re
 
 <img width="1849" height="1884" alt="Imagen" src="https://github.com/user-attachments/assets/382faf6b-e898-4299-b55e-e14969a19ee2" />
 
+Como curiosidad extra y también cosa a tener en cuenta ya que me equivoque en el montaje varias veces es que fritzing no tiene nuestro modelo de joystick asi que lo tuve que descargar de aqui:
+
+https://forum.fritzing.org/t/joystick-module-fritzing-part/34688
+
+La principal diferencia es la disposición de los pines
+
 ## 13. Resultado actual
 
 A lo largo del desarrollo he pasado de probar cada componente de forma independiente a integrarlos en un único sistema.
